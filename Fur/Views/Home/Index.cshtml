@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Fur.Models.Lamp>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <form method="Get" action="">
+        <input type="submit" class="btn btn-success" name="Stol"  value="Стол">
+        <input type="submit" class="btn btn-success" name="Stol"  value="Стул">
+        <input type="submit" class="btn btn-success" name="Stol"  value="Кровать">
+        <input type="submit" class="btn btn-success" name="Stol"  value="Диван">
+    </form>
+    @{
+        string head = " ";
+        try
+        {
+            head = ViewData["s"].ToString();
+        }
+        catch
+        { }
+    }
+    <table>
+        <tr class="header">
+            <td  class="shir"><p>Название мебели</p></td>
+            <td  class="shir"><p>Фото</p></td>
+            <td  class="shir"><p>Цена</p></td>
+            <td class="shir"><p>Артикуль</p></td>
+            <td class="shir"><p>Категория</p></td>
+        </tr>
+        @foreach (Fur.Models.Lamp b in Model)
+        {
+            <tr>
+                @if (b.Activiti == '1'.ToString() && ((b.Kategoria == head)||(head==" ")))
+                {
+
+                    <td class="shir"><p>@b.Name</p></td>
+                    <td class="shir"><img src="../img/@b.Kategoria/@b.Foto" style="height:50px;width:50px;"></td>
+                    <td class="shir"><p>@b.Price</p></td>
+                    <td class="shir"><p>@b.Articul</p></td>
+                    <td class="shir"><p>@b.Kategoria</p></td>
+                }
+            </tr>
+        }
+    </table>
+</div>
