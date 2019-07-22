@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Fur.Models.Lamp>
+@{
+    ViewBag.Title = "products";
+}
+<div class="container" style="padding-top:25px;">
+    @foreach (Fur.Models.Lamp b in Model)
+    {
+        if (Convert.ToInt32(ViewData["Nomer"]) == b.Id)
+        {
+            <img src="../../img/@b.Kategoria/@b.Foto" style="height:250px" />
+            <p><strong>Название:</strong><i>@b.Name</i></p>
+            <p><strong>Стоимость:</strong><i>@b.Price</i></p>
+            <p><strong>Артикуль:</strong><i>@b.Articul</i></p>
+            <p><strong>Категория:</strong><i>@b.Kategoria</i></p>
+        }
+    }
+</div>

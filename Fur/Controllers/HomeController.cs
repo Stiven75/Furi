@@ -10,22 +10,32 @@ namespace Fur.Controllers
     public class HomeController : Controller
     {
         LampContext db = new LampContext();
-        СategoryContext dk = new СategoryContext();
+
         public ActionResult Index()
         {
-           
-                           
-            IEnumerable<Сategory> Сategories = dk.Сategories;
-            ViewBag.Сategories = Сategories;
-            return View(db.Lamps);
+            IEnumerable<Lamp> Lamps = db.Lamps;
+            ViewBag.Lamps = Lamps;
+            IEnumerable<Bat> Bats = db.Bats;
+            ViewBag.Bats = Bats;
+
+            return View();
         }
-        [HttpGet]
+        [HttpPost]
         public ActionResult Index(string Stol)
         {
             ViewData["s"] = Stol;
             return Index();
         }
+    
+                    
+       [HttpGet]
+        public ActionResult products(int Id)
+        {
+           
 
+            ViewData["Nomer"] = Id;
+            return View(db.Lamps);
+        }
 
     }
 }

@@ -1,0 +1,23 @@
+﻿.marker {
+    list-style:none;
+    padding:0;
+}
+.shir {
+    padding: 0 20px;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+}
+.kategorua {
+    margin:10px 0;
+}
+.ramka {
+    padding: 5px;
+    border-radius: 2px;
+    border-style: solid;
+}
+.granici {
+    border:none;
+}

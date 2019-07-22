@@ -9,5 +9,6 @@ namespace Fur.Models
     public class LampContext: DbContext
     {
         public DbSet<Lamp> Lamps { get; set; }
+        public DbSet<Bat> Bats { get; set; }
     }
 }
