@@ -136,6 +136,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\СategoryContext.cs" />
+    <Compile Include="Models\Сategory.cs" />
     <Compile Include="Models\Lamp.cs" />
     <Compile Include="Models\LampContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
