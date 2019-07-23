@@ -31,7 +31,9 @@ namespace Fur.Controllers
        [HttpGet]
         public ActionResult products(int Id)
         {
-           
+            
+            IEnumerable<Bat> Bats = db.Bats;
+            ViewBag.Bats = Bats;
 
             ViewData["Nomer"] = Id;
             return View(db.Lamps);

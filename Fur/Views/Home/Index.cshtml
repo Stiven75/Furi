@@ -15,17 +15,10 @@
             }
             <div class="col-lg-2">
                 <form method="post" action="">
-                    <div class="ramka text-center">
-                        <ul class="marker">
-                            @foreach (var b in ViewBag.Bats)
-                            {
-                                <li class="kategorua"><input type="submit" class="btn btn-success" name="Stol" value="@b.Name"></li>
-                            }
-                        </ul>
-                    </div>
+                    <p>@Html.Partial("Category")</p>
                 </form>
             </div>
-            <div  class="col-lg-10">
+            <div class="col-lg-10">
 
                 <table>
                     <thead class="alert alert-success">
@@ -34,22 +27,22 @@
                             <td class="shir"><p>Цена</p></td>
                         </tr>
                     </thead>
-                    <form method="get" action="">
-                    <tbody class="alert alert-info">
-                        @foreach (var b in ViewBag.Lamps)
-                        {
-                        
+                    <form method="get" action="/Home/products/">
+                        <tbody class="alert alert-info">
+                            @foreach (var b in ViewBag.Lamps)
+                            {
+
                                 if (b.Activiti == '1'.ToString() && ((b.Kategoria == head) || (head == " ")))
                                 {
                                     <tr>
-                                        <td class="shir"><a class="granici alert-info" href="Home/products/@b.Id">@b.Name</a></td>
+                                        <td class="shir"><a class="granici alert-info" href="products/@b.Id">@b.Name</a></td>
                                         <td class="shir"><p>@b.Price</p></td>
                                     </tr>
                                 }
-                 
-                        }
-                    </tbody>
-                     </form>
+
+                            }
+                        </tbody>
+                    </form>
                 </table>
             </div>
         </div>
