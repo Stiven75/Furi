@@ -132,13 +132,18 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Bat.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Lamp.cs" />
     <Compile Include="Models\LampContext.cs" />
+    <Compile Include="Models\Offer.cs" />
+    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +191,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\products.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Home\Category.cshtml" />
   </ItemGroup>
   <ItemGroup />

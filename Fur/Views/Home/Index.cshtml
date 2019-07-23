@@ -1,49 +1,29 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<div>
-   
-        <div class="container" style="margin-top:25px;">
-            @{
-                string head = " ";
-                try
-                {
-                    head = ViewData["s"].ToString();
-                }
-                catch
-                { }
-            }
-            <div class="col-lg-2">
-                <form method="post" action="">
-                    <p>@Html.Partial("Category")</p>
-                </form>
-            </div>
-            <div class="col-lg-10">
+﻿ @model IEnumerable<Fur.Models.Product>
+    @{ 
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <div>
+        <table>
+            <thead class="alert alert-success">
+                <tr class="header">
+                    <td class="shir"><p>Название мебели</p></td>
+                    <td class="shir"><p>Цена</p></td>
+                </tr>
+            </thead>
+            <form method="get" action="/Home/products/">
+                <tbody class="alert alert-info">
+                    @foreach(var item in Model)                     
+                    {
+                    if (item.Activiti == '1'.ToString())
+                    {
+                    <tr>
+                        <td class="shir"><a class="granici alert-info" href="products/@item.Id">@item.Name</a></td>
+                        <td class="shir"><p>@item.Offer.Price</p></td>
+                    </tr>
+                    }
 
-                <table>
-                    <thead class="alert alert-success">
-                        <tr class="header">
-                            <td class="shir"><p>Название мебели</p></td>
-                            <td class="shir"><p>Цена</p></td>
-                        </tr>
-                    </thead>
-                    <form method="get" action="/Home/products/">
-                        <tbody class="alert alert-info">
-                            @foreach (var b in ViewBag.Lamps)
-                            {
-
-                                if (b.Activiti == '1'.ToString() && ((b.Kategoria == head) || (head == " ")))
-                                {
-                                    <tr>
-                                        <td class="shir"><a class="granici alert-info" href="products/@b.Id">@b.Name</a></td>
-                                        <td class="shir"><p>@b.Price</p></td>
-                                    </tr>
-                                }
-
-                            }
-                        </tbody>
-                    </form>
-                </table>
-            </div>
-        </div>
-</div>
+                    }
+                </tbody>
+            </form>
+        </table>
+    </div>

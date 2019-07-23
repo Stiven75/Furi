@@ -8,7 +8,14 @@ namespace Fur.Models
 {
     public class LampContext: DbContext
     {
-        public DbSet<Lamp> Lamps { get; set; }
-        public DbSet<Bat> Bats { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Offer> Offers { get; set; }
+
+        /*
+        
+                public DbSet<Categoru> Categories { get; set; }
+                public DbSet<Photo> Photos { get; set; }
+        */
     }
 }

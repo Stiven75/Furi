@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Fur.Models.Category>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ramka text-center">
+    <ul class="marker">
+        @foreach (var item in Model)
+        {
+            <li>
+                <input type="submit"  class="granici alert-info" name="stol" value="@item.Name">
+            </li>
+
+        }
+    </ul>
+</div>
+
