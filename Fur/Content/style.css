@@ -3,7 +3,7 @@
     padding:0;
 }
 .shir {
-    padding: 0 20px;
+    padding:  5px;
 }
 
 .centered {
@@ -12,12 +12,17 @@
 }
 .kategorua {
     margin:10px 0;
+    padding:10px;
 }
 .ramka {
     padding: 5px;
     border-radius: 2px;
     border-style: solid;
+    padding: 10px;
 }
 .granici {
     border:none;
+}
+.osnova {
+    margin: 20px;
 }

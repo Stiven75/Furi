@@ -134,12 +134,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Bat.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Lamp.cs" />
     <Compile Include="Models\LampContext.cs" />
     <Compile Include="Models\Offer.cs" />
     <Compile Include="Models\Photo.cs" />
@@ -187,12 +186,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\products.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Home\Category.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

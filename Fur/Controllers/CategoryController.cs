@@ -8,10 +8,13 @@ using Fur.Models;
 
 namespace Fur.Controllers
 {
+    
     public class CategoryController : Controller
     {
         LampContext db = new LampContext();
         public ActionResult Index()
-        {return View(db.Categories);}
+        {
+            return View(db.Categories);
+        }
     }
 }

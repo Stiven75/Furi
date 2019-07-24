@@ -16,7 +16,8 @@ namespace Fur.Models
         public Category Category { get; set; }
         public int? OfferId { get; set; }      
         public Offer Offer { get; set; }
-
+        public int? PhotoId { get; set; }
+        public Photo Photo { get; set; }
     }
 
 }

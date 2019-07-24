@@ -30,15 +30,16 @@
             </div>
         </div>
     </div>
-
+    <div class="osnova">
     <div class="col-lg-2">
-        <form method="post" action="">
-            @RenderBody()
-        </form>
+            @Html.Partial("../Category/Index", new List<string> { "Стол", "Стул", "Кровать", "Диван" })
     </div>
-    <hr />
+
     <div class="col-lg-10">
+            @RenderBody()
     </div>
+        </div>
+    <hr />
     <footer>
         <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
     </footer>

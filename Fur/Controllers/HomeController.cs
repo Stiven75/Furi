@@ -5,18 +5,22 @@ using System.Web;
 using System.Web.Mvc;
 using Fur.Models;
 using System.Data.Entity;
+using Fur.Controllers;
+
 
 namespace Fur.Controllers
 {
+    [RoutePrefix("~/")]
     public class HomeController : Controller
     {
         LampContext db = new LampContext();
-        [Route("Category/Index")]
+        Category f = new Category();
         public ActionResult Index()
         {
-            var Products = db.Products.Include(p=>p.Category).Include(p => p.Offer);
+
+            var Products = db.Products.Include(p => p.Category).Include(p => p.Offer);
             return View(Products);
-        }
+        }        
         [HttpPost]
         public ActionResult Index(string Stol)
         {
@@ -24,21 +28,12 @@ namespace Fur.Controllers
             return Index();
         }
 
-        
-        public ActionResult Category()
+        [HttpGet]
+        public ActionResult product(int Id=5)
         {
-            return View(db.Categories);
-        }
-        /*[HttpGet]
-         public ActionResult products(int Id)
-         {
-
-             IEnumerable<Bat> Bats = db.Bats;
-             ViewBag.Bats = Bats;
-
              ViewData["Nomer"] = Id;
-             return View(db.Lamps);
-         }*/
+           return Content($"controller: Product | action: Index");
+        }
 
     }
 }
