@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Fur.Models.Offer>
+
+<div id="searchresults">
+    @{
+        string head = " "; int color = 0, size = 0, shet = 0;
+        try
+        {
+            size = Convert.ToInt32(ViewData["size"]);
+            color = Convert.ToInt32(ViewData["color"]);
+            head = ViewData["g"].ToString();
+        }
+        catch { }
+    }
+
+
+
+    @if (Model.Count() > 0)
+    {
+
+        foreach (var item in Model)
+        {
+
+            if (@item.Articul.IndexOf(head) != -1)
+            {
+
+                if (@item.ColorId == color)
+                {
+                    if (@item.SizeId == size)
+                    {
+                        if (shet != 1)
+                        {
+                            shet++;
+                        <p><strong>Стоимость:</strong><i>@item.Price</i></p>
+                        <p><strong>Артикуль:</strong><i>@item.Articul</i></p>
+                        }
+                    }
+
+                }
+            }
+        }
+
+    }
+</div>

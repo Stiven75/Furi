@@ -14,7 +14,8 @@ namespace Fur.Controllers
         LampContext db = new LampContext();
         public ActionResult Index()
         {
-            return View(db.Categories);
+            var Products = db.Products.Include(p => p.Category).Include(p => p.Offer);
+            return View(Products);
         }
     }
 }

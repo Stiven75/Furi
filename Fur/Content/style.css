@@ -26,3 +26,11 @@
 .osnova {
     margin: 20px;
 }
+.razmer_k {
+    border: none;
+    border-radius: 25px;
+    width: 22px;
+}
+.s_act {
+    background: #8a8a8a;
+}

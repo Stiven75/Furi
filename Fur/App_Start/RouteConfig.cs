@@ -14,10 +14,7 @@ namespace Fur
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-           // routes.MapRoute(
-              //  name: "Default",
-              //  url: "{controller}/{action}/{id}",
-             //   defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+
             routes.MapRoute(
                 name: "default1",
                 url: "{controller}/{action}",
@@ -25,13 +22,23 @@ namespace Fur
             routes.MapRoute(
                 name: "Product",
                 url: "{controller}/{action}/url-{id}",
-                defaults: new { controller = "Product", action = "Index", },
+               defaults: new { controller = "Home", action = "Index" },
                                 constraints: new { controller = "^Product.*", action = "^Index$" });
             routes.MapRoute(
                 name: "Category",
                 url: "{controller}/{action}/{stol}",
-                defaults: new { controller = "Home", action = "Index" },
-                constraints: new { controller = "^Home.*", action = "^Index$" });
+               defaults: new { controller = "Category", action = "Index" },
+                constraints: new { controller = "^Category.*", action = "^Index$" });
+            routes.MapRoute(
+                name: "Json",
+                url: "{controller}/{action}/{name}/{art}/{size}",
+               defaults: new { controller = "Home", action = "Index" },
+                constraints: new { controller = "^Product.*", action = "^Color$" });
+
+            routes.MapRoute(
+             name: "Default",
+             url: "{controller}/{action}/{id}",
+              defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

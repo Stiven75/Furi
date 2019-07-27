@@ -14,20 +14,22 @@ namespace Fur.Controllers
     public class HomeController : Controller
     {
         LampContext db = new LampContext();
-        Category f = new Category();
+        CategoryController f = new CategoryController();
         public ActionResult Index()
         {
 
             var Products = db.Products.Include(p => p.Category).Include(p => p.Offer);
             return View(Products);
-        }        
+        }
+        
         [HttpPost]
         public ActionResult Index(string Stol)
         {
             ViewData["s"] = Stol;
-            return Index();
+            var Products = db.Products.Include(p => p.Category).Include(p => p.Offer);
+            return PartialView(Products);
         }
-
+        
         [HttpGet]
         public ActionResult product(int Id=5)
         {

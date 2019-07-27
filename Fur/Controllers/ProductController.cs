@@ -24,5 +24,24 @@ namespace Fur.Controllers
             ViewData["Nomer"] = Id;
             return View(Products);
         }
+
+
+        public ActionResult Color(string art,string souz)
+        {
+            try
+            {
+                string size = souz[1].ToString(), color = souz[0].ToString();
+
+                ViewData["g"] = art;
+                ViewData["color"] = color;
+                ViewData["size"] = size;
+
+            }
+            catch  { }
+            var Offers = db.Offers;
+            //var Offers = db.Offers.Where(o => o.Color.Name.Contains(name)).ToList();
+            return PartialView(Offers);
+        }
     }
+
 }
