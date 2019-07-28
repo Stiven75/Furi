@@ -1,14 +1,38 @@
-﻿
-@model IEnumerable<string>
-<div class="ramka text-center">
-    <form method="Post" action="~/Home/Index">
-        <ul class="marker">
-            @foreach (string t in Model)
+﻿@model IEnumerable<Fur.Models.Product>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table>
+    <thead class="alert alert-success">
+        <tr class="header">
+            <td class="shir"><p>Название мебели</p></td>
+            <td class="shir"><p>Цена</p></td>
+        </tr>
+    </thead>
+    @{
+        string head = " ";
+        try
+        {
+            head = ViewData["s"].ToString();
+        }
+        catch { }
+    }
+
+    <tbody class="alert alert-info">
+        <form method="get" action="~/Home/product">
+            @foreach (var item in Model)
             {
-                <li class="kategorua">
-                    <a href="~/Category/Index"><input type="submit" class="granici alert-info" name="stol" value="@t"></a>
-                </li>
+                if (item.Activiti == '1'.ToString() && ((item.Category.Name == head) || (head == " ")))
+                {
+
+                    <tr>
+                        <td class="shir"><a class="granici alert-info" href="~/Product/Index/url-@item.Id">@item.Name</a></td>
+                        <td class="shir"><p>@item.Offer.Price</p></td>
+                    </tr>
+                }
             }
-        </ul>
-     </form>
-</div>
+        </form>
+    </tbody>
+
+</table>

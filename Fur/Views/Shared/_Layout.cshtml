@@ -35,9 +35,9 @@
         </div>
     </div>
     <div class="osnova">
-    <div class="col-lg-2">
-            @Html.Partial("../Category/Index", new List<string> { "Стол", "Стул", "Кровать", "Диван" })
-    </div>
+        <div class="col-lg-2">
+            @Html.Partial("../Category/Category", new List<string> { "Стол", "Стул", "Кровать", "Диван" })
+        </div>
 
     <div class="col-lg-10">
             @RenderBody()

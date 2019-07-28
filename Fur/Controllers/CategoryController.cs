@@ -12,8 +12,10 @@ namespace Fur.Controllers
     public class CategoryController : Controller
     {
         LampContext db = new LampContext();
-        public ActionResult Index()
+        [Route("{controller}/{stol}")]
+        public ActionResult Index(string Stol)
         {
+            ViewData["s"] = Stol;
             var Products = db.Products.Include(p => p.Category).Include(p => p.Offer);
             return View(Products);
         }

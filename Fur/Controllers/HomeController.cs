@@ -26,8 +26,8 @@ namespace Fur.Controllers
         public ActionResult Index(string Stol)
         {
             ViewData["s"] = Stol;
-            var Products = db.Products.Include(p => p.Category).Include(p => p.Offer);
-            return PartialView(Products);
+
+            return Redirect($"~/Category/{Stol}");
         }
         
         [HttpGet]

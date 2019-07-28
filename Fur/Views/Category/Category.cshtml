@@ -1,0 +1,13 @@
+﻿@model IEnumerable<string>
+<div class="ramka text-center">
+    <form method="Post" action="~/Home/Index">
+        <ul class="marker">
+            @foreach (string t in Model)
+            {
+                <li class="kategorua">
+                    <a href="~/Category/Index"><input type="submit" class="granici alert-info" name="stol" value="@t"></a>
+                </li>
+            }
+        </ul>
+    </form>
+</div>
