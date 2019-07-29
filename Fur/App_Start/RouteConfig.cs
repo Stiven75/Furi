@@ -14,31 +14,23 @@ namespace Fur
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-
+            
 
             routes.MapRoute(
                 name: "Product",
                 url: "{controller}/{action}/url-{id}",
-               defaults: new { controller = "Product", action = "Index" },
+               defaults: new { controller = "Home", action = "Index" },
                                 constraints: new { controller = "^Product.*", action = "^Index$" });
+            routes.MapRoute("Category", "{controller}/{stol}", new { controller = "Home", action = "Index" }, new { Controller = "Category", Action = "Index" });
+
             routes.MapRoute(
-                name: "Category",
-                url: "{controller}/{stol}",
-               defaults: new { controller = "Category", action = "Index" },
-                constraints: new { controller = "^Category.*", action = "Index" });
-
-
-            
-                routes.MapRoute(
-                name: "Color",
-                url: "{controller}/{action}/{art}/{souz}",
-               defaults: new { controller = "Product", action = "Color" },
+                name: "Json",
+                url: "{controller}/{action}/",
+               defaults: new { controller = "Home", action = "Index" },
                 constraints: new { controller = "^Product.*", action = "^Color$" });
-                        routes.MapRoute(
-                 name: "Cat",
-                 url: "{controller}/{action}",
-                 defaults: new { controller = "Home", action = "Index" });
-            
+
+            routes.MapRoute("Default", "{controller}/{action}", new { controller = "Home", action = "Index" }, new { Controller = "Home" });
+
         }
     }
 }

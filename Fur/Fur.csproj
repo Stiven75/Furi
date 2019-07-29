@@ -194,7 +194,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Product\Color.cshtml" />
-    <Content Include="Views\Category\Category.cshtml" />
+    <Content Include="Views\Category\Categoru.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
