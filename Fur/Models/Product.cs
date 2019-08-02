@@ -18,6 +18,15 @@ namespace Fur.Models
         public Offer Offer { get; set; }
         public int? PhotoId { get; set; }
         public Photo Photo { get; set; }
+
+        public ICollection<Basket> Baskets { get; set; }
+        public Product()
+        {
+            Baskets = new List<Basket>();
+            return;
+        }
+
+
     }
 
 }

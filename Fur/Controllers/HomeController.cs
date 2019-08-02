@@ -14,10 +14,8 @@ namespace Fur.Controllers
     public class HomeController : Controller
     {
         LampContext db = new LampContext();
-        CategoryController f = new CategoryController();
         public ActionResult Index()
         {
-
             var Products = db.Products.Include(p => p.Category).Include(p => p.Offer);
             return View(Products);
         }
@@ -26,14 +24,13 @@ namespace Fur.Controllers
         public ActionResult Index(string Stol)
         {
             ViewData["s"] = Stol;
-
             return Redirect($"~/Category/{Stol}");
         }
         
         [HttpGet]
         public ActionResult product(int Id=5)
         {
-             ViewData["Nomer"] = Id;
+           ViewData["Nomer"] = Id;
            return Content($"controller: Product | action: Index");
         }
 

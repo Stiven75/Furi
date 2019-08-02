@@ -1,18 +1,17 @@
 ﻿@model IEnumerable <Fur.Models.Product>
 @{
-    ViewBag.Title = "products";
+    ViewBag.Title = "Товар";
 }
 <div class="container" style="padding-top:25px;">
 
     <div class="row">
-
         <div id="col" style="display:none;">Red</div>
         <p id="siz" style="display:none;">S</p>
         @foreach (var item in Model)
         {
             if (Convert.ToInt32(ViewData["Nomer"]) == item.Id)
             {<i id="art" style="display:none;">@item.Offer.Articul</i>
-
+            <i id="id" style="display:none;">@item.Id</i>
             <img src="../../img/@item.Category.Name/@item.Photo.Photi" style="height:250px" />
             <p><strong>Название:</strong><i>@item.Name</i></p>
 
@@ -30,13 +29,13 @@
 
             <div id="results"></div>
             <div id="skrit">
-            <p><strong>Стоимость:</strong><i>@item.Offer.Price</i></p>
-            <p><strong>Артикуль:</strong><i>@item.Offer.Articul</i></p>
-                </div>
+                <p><strong>Стоимость:</strong><i id="sum">@item.Offer.Price</i></p>
+                <p><strong>Артикуль:</strong><i id="artl">@item.Offer.Articul</i></p>
+            </div>
             <p><strong>Категория:</strong><i>@item.Category.Name</i></p>
+            <p><input type="button" name="price" id="5" class="btn btn-danger" value="Купить" /></p>
         }
     }
-
     </div>
     <script>
         $(document).ready(function () {
@@ -143,12 +142,29 @@
 
            // alert(souz);
             $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
+        });
+        $('#5').click(function (e) {
+                e.preventDefault();
+                var art = $('#artl').html();
+            var id = $('#id').html();
+            var sum = $('#sum').html();
+            art = art + sum;
+            $('#results').load('/Basket/Sold?ProductId=' + id, 'Articul=' + art);
+            $('#content').load('/Basket/Basket', showNewContent)//Запрос к странице
+            function showNewContent() {
+                $('#content').show('normal');
+            }
+            $('#max').load('/Basket/Max', showNewContent)//Запрос к странице
+            function showNewContent() {
+                $('#max').show('normal');
+            }
+            //$('#max').css('display', 'none');
             });
+
     });
     </script>
 
 
 
-    @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
-    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
+   
 </div>

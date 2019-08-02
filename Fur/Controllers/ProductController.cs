@@ -32,7 +32,7 @@ namespace Fur.Controllers
             {
                 string size = souz[1].ToString(), color = souz[0].ToString();
 
-                ViewData["g"] = art;
+                ViewData["g"] = art.Remove(art.Length-2,2);
                 ViewData["color"] = color;
                 ViewData["size"] = size;
 

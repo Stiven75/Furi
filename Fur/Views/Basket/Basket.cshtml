@@ -1,0 +1,133 @@
+﻿@model IEnumerable<Fur.Models.Basket>
+
+<link rel="stylesheet" href="~/Content/style.css" type="text/css" />
+<table class="table-hover" id="content">
+    <thead class="alert alert-success">
+        <tr class="header">
+            <td class="shir text-center"><p>Название мебели</p></td>
+            <td class="shir text-center"><p>Фото</p></td>
+            <td class="shir text-center"><p>Цвет</p></td>
+            <td class="shir text-center"><p>Размер</p></td>
+            <td class="shir text-center"><p>Стоимость</p></td>
+            <td class="shir text-center"></td>
+        </tr>
+    </thead>
+    @{
+        string head = " ";
+        try
+        {
+            head = ViewData["s"].ToString();
+        }
+        catch { }
+    }
+
+    <tbody class="alert alert-info">
+        <p>@ViewData["grom"]</p>
+        <form method="get" action="~/Home/product">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="stoka_tab"><p><i>@item.Product.Name</i></p></td>
+                    <td class="stoka_tab"><img src="../../img/@item.Product.Category.Name/@item.Product.Photo.Photi" style="height:50px" /></td>
+                    @{
+                        try
+                        {
+                            ViewData["siz"] = item.Articul.Remove(0, item.Articul.Length - 1);
+                            ViewData["col"] = item.Articul.Remove(0, item.Articul.Length - 2);
+                            ViewData["col"] = ViewData["col"].ToString().Remove(1, 1);
+                        }
+                        catch { }
+                    }
+
+                    @switch (ViewData["col"])
+                    {
+                        case "1":
+
+                            switch (ViewData["siz"])
+                            {
+                                case "1":
+                                    <td class="stoka_tab"><div class="razmer2" style="background: rgb(255, 0, 0);"></div></td>
+                                    <td class="stoka_tab"><div class="razmer2 centered" style="background: rgb(138, 138, 138);">S</div></td>
+                                    break;
+
+                                case "2":
+                                    <td class="stoka_tab"><div class="razmer2" style="background: rgb(255, 0, 0);"></div></td>
+                                    <td class="stoka_tab"><div class="razmer2 centered" style="background: rgb(138, 138, 138);">M</div></td>
+                                    break;
+
+                            }
+                            break;
+                        case "2":
+
+                            switch (ViewData["siz"])
+                            {
+                                case "1":
+                                    <td class="stoka_tab"><div class="razmer2" style="background: #76ff7a;"></div></td>
+                                    <td class="stoka_tab"><div class="razmer2 centered" style="background: rgb(138, 138, 138);">S</div></td>
+                                    break;
+
+                                case "2":
+                                    <td class="stoka_tab"><div class="razmer2" style="background: #76ff7a;"></div></td>
+                                    <td class="stoka_tab"><div class="razmer2 centered" style="background: rgb(138, 138, 138);">M</div></td>
+                                    break;
+
+                            }
+                            break;
+
+                    }
+
+                    <td class="stoka_tab"><p><i>@item.Price</i></p></td>
+
+                    <td class="stoka_tab"><input type="checkbox" id="@item.Id"></td>
+                </tr>
+            }
+        </form>
+    </tbody>
+
+</table>
+<div id="maxi">
+@Html.Action("Max")
+    </div>
+<script>
+
+    function press() {
+        var g;
+        if ($('#max').html() != 0)
+        {
+            g = $('#max').html();
+        }
+        else
+        {
+            g = 1000000;
+        }
+        
+        for (i = 0; i <= g; i++) {
+            if ($("#" + i).prop("checked") == true) {
+                var t = i;
+            }
+
+
+        }
+
+
+
+
+        $('#results').load('/Basket/Del?Id=' + t);
+        $('#content').load('/Basket/Basket', showNewContent)//Запрос к странице
+        function showNewContent() {
+            $('#content').show('normal');
+        }
+
+
+
+    }
+
+
+
+
+
+
+</script>
+
+
+

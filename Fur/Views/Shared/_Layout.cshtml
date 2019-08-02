@@ -12,9 +12,10 @@
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
     @Scripts.Render("~/scripts/jquery-3.3.1.js")
     @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.js")
+    @Scripts.Render("~/scripts/jquery-1.10.2.min.js")
+    @Scripts.Render("~/scripts/jquery.unobtrusive-ajax.min.js")
 </head>
 <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -30,6 +31,7 @@
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                     <li>@Html.ActionLink("О программе", "About", "Home")</li>
                     <li>@Html.ActionLink("Контакт", "Contact", "Home")</li>
+                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Корзина</button></li>
                 </ul>
             </div>
         </div>
@@ -38,17 +40,36 @@
         <div class="col-lg-2">
             @Html.Partial("../Category/Categoru", new List<string> { "Стол", "Стул", "Кровать", "Диван" })
         </div>
-
-    <div class="col-lg-10">
+        <div class="col-lg-10">
             @RenderBody()
-    </div>
         </div>
+    </div>
     <hr />
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.Action("Basket", "Basket")
+                </div>
+                <div class="modal-footer">
+                    <input type="button" name="del" id="6" onclick="press()"  class="btn btn-danger" value="Удалить" />
+                   <button type="button" class="btn btn-primary">Перейти к оформлению</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
         <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    
 </body>
 </html>
