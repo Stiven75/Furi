@@ -199,6 +199,7 @@
     <Content Include="Views\Category\Categoru.cshtml" />
     <Content Include="Views\Basket\Basket.cshtml" />
     <Content Include="Views\Basket\Max.cshtml" />
+    <Content Include="Views\Basket\Kol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

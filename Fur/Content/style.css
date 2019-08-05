@@ -46,3 +46,11 @@ padding:10px 10px;
 {
     display:none !important;
 }
+.metka {
+    border-radius: 25px;
+    color: white;
+    font-size: 15px;
+    background: green;
+    padding: 0 5px;
+    margin: -10px;
+}

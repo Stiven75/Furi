@@ -59,7 +59,15 @@ namespace Fur.Controllers
             catch { }
             return PartialView();
         }
-
+        public ActionResult Kol()
+        {
+            try
+            {
+                ViewData["kol"] = db.Baskets.Count();
+            }
+            catch { }
+            return PartialView();
+        }
 
     }
 }

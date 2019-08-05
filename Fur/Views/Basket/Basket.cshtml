@@ -88,46 +88,7 @@
 <div id="maxi">
 @Html.Action("Max")
     </div>
-<script>
 
-    function press() {
-        var g;
-        if ($('#max').html() != 0)
-        {
-            g = $('#max').html();
-        }
-        else
-        {
-            g = 1000000;
-        }
-        
-        for (i = 0; i <= g; i++) {
-            if ($("#" + i).prop("checked") == true) {
-                var t = i;
-            }
-
-
-        }
-
-
-
-
-        $('#results').load('/Basket/Del?Id=' + t);
-        $('#content').load('/Basket/Basket', showNewContent)//Запрос к странице
-        function showNewContent() {
-            $('#content').show('normal');
-        }
-
-
-
-    }
-
-
-
-
-
-
-</script>
 
 
 
