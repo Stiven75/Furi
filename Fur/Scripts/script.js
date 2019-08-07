@@ -6,21 +6,38 @@
     else {
         g = 1000000;
     }
+    let metka = [];
     for (i = 0; i <= g; i++) {
         if ($("#" + i).prop("checked") == true) {
+            metka[i] = i;
             var t = i;
         }
 
       
     }
 
-    $('#content').load('/Basket/Del?Id=' + t);
-    $('#content').load('/Basket/Basket', showNewContent)//Запрос к странице
-    function showNewContent() {
-        $('#content').show('normal');
+
+    if (metka.length != 0)
+    {
+        for (i = 0; i <= g; i++)
+        {
+            if (metka[i] == i)
+            {
+         $('#content').load('/Basket/Del?Id=' + i);
+            }
+        }
     }
-    $('#Kol').load('/Basket/Kol', showNewContent)//Запрос к странице
-    function showNewContent() {
-        $('#Kol').show('normal');
+    else
+    {
+ $('#content').load('/Basket/Del?Id=' + t);
     }
+    $('#Kol').load('/Basket/Kol', reset());
+    $('#content').load('/Basket/Basket', reset());
+    $('#max').load('/Basket/Max', reset());
+}
+
+function reset() {
+    $('#Kol').load('/Basket/Kol');
+    $('#content').load('/Basket/Basket');
+    $('#max').load('/Basket/Max');
 }

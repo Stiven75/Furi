@@ -61,8 +61,8 @@
                 case "Green": color = "2"; break;
             }
             var souz = color + size;
-           // alert(souz);
-            $('#results').load('/Product/Color?art=' + art,'souz='+souz);
+            $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
+            reset();
             });
         $('#2').click(function (e) {
             e.preventDefault();
@@ -86,8 +86,9 @@
                 }
                 
             var souz = color + size;
-           // alert(souz);
-                $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
+
+            $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
+            reset();
             });
         $('#3').click(function (e) {
             e.preventDefault();
@@ -99,7 +100,7 @@
                 coli.empty();
                 coli.append("S");
                 var color = $('#col').html();
-                var art = $('#art').html();//берем артикул
+                var art = $('#art').html();
                 var size = "S";
 
                 switch (size) {
@@ -113,8 +114,9 @@
                 }
             var souz = color + size;
 
-            //alert(souz);
-                $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
+
+            $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
+            reset();
             });
         $('#4').click(function (e) {
             e.preventDefault();
@@ -126,7 +128,7 @@
             coli.empty();
             coli.append("M");
             var color = $('#col').html();
-            var art = $('#art').html();//берем артикул
+            var art = $('#art').html();
             var size = "M";
 
             switch (size) {
@@ -140,32 +142,30 @@
             }
             var souz = color + size;
 
-           // alert(souz);
             $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
+            reset();
         });
         $('#5').click(function (e) {
                 e.preventDefault();
-                var art = $('#artl').html();
+            var art = $('#artl').html();
             var id = $('#id').html();
             var sum = $('#sum').html();
             art = art + sum;
-            $('#results').load('/Basket/Sold?ProductId=' + id, 'Articul=' + art);
-            $('#content').load('/Basket/Basket', showNewContent)//Запрос к странице
-            function showNewContent() {
-                $('#content').show('normal');
-            }
-            $('#max').load('/Basket/Max', showNewContent)//Запрос к странице
-            function showNewContent() {
-                $('#max').show('normal');
-            }
-            $('#Kol').load('/Basket/Kol', showNewContent)//Запрос к странице
-            function showNewContent() {
-                $('#Kol').show('normal');
-            }
-            //$('#max').css('display', 'none');
+            $('#content').load('/Basket/Sold?ProductId=' + id, 'Articul=' + art)
+            $('#Kol').load('/Basket/Kol', reset());
+            $('#content').load('/Basket/Basket', reset());
+            $('#max').load('/Basket/Max', reset());
+
             });
 
-    });
+        });
+
+        function reset()
+        {
+            $('#Kol').load('/Basket/Kol');
+            $('#content').load('/Basket/Basket');
+            $('#max').load('/Basket/Max');
+        }
     </script>
 
 
