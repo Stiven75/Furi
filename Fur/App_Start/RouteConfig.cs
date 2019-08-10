@@ -35,7 +35,11 @@ namespace Fur
                  url: "{controller}/{action}/",
                 defaults: new { controller = "Home", action = "Index" },
                  constraints: new { controller = "^Basket.*" });
-
+            routes.MapRoute(
+             name: "Orders",
+             url: "{controller}/{action}/",
+            defaults: new { controller = "Home", action = "Index" },
+             constraints: new { controller = "^Order.*" });
 
             routes.MapRoute(
                  name: "Max",

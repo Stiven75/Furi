@@ -12,7 +12,10 @@ namespace Fur.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Offer> Offers { get; set; }
         public DbSet<Basket> Baskets  { get; set; }
-
+        public DbSet<Good> Goods { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
+        public DbSet<Variant> Variants { get; set; }
+        public DbSet<Order> Orders { get; set; }
         /*
         
                 public DbSet<Categoru> Categories { get; set; }

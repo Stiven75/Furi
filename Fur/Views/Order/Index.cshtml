@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Fur.Models.Basket>
+@{
+    ViewBag.Title = "Заявка";
+}
+@{
+
+    int gok = 0;string n = "", a = "";
+}
+    <p>Оформление заявки</p>
+    <table class="rtable-hover">
+        <thead class="alert alert-success">
+            <tr class="header">
+                <td class="shir text-center"></td>
+                <td class="shir text-center"><p>Название мебели</p></td>
+                <td class="shir text-center"><p>Артикул</p></td>
+                <td class="shir text-center"><p>Стоимость</p></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                gok++;
+                n=gok.ToString()+'1';
+                a = gok.ToString() + '2';
+                <tr>
+                    <td class="stoka_tab"><input type="hidden" value="@item.Id" id="@gok"></td>
+                    <td class="stoka_tab"><p><i>@item.Product.Name</i></p></td>
+                    <td class="stoka_tab"><p><i id="@n">@item.Articul</i></p></td>
+                    <td class="stoka_tab"><p><i id="@a">@item.Price</i></p></td>
+                </tr>
+                
+            }
+        </tbody>
+    </table>
+<input type="hidden" value="@gok"  id="kon">
+    <p>Сумма итого:<i><input type="text" value="@Html.Action("Sum", "Order")" name="sum" disabled /></i></p>
+    <p><input type="text" class="panel-info" name="imua" placeholder="Введите имя" id="name"></p>
+    <p><input type="tel" class="panel-info" name="nomer" placeholder="Введите номер" id="nomer"></p>
+    <p>@Html.Action("Delivery", "Order")</p>
+    <p id="varina">@Html.Action("Variant", "Order")</p>
+    <a href="~/Order/Final"><input type="submit" class="btn btn-danger" name="g" value="Сохранить" onclick="t()"></a>
+
+<script>
+
+
+    function t()
+    {
+        var nom = $('#nomer').val();
+        var name = $('#name').val();
+        var d = $('#deli').val();
+        var v = $('#varik').val();
+        nom = nom + d + v;
+       $('#content').load('/Order/Solder?imua=' + name, 'nomer=' + nom);
+        $('#varina').load('/Order/Variant');
+        $('#varina').load('/Order/Variant');
+        //id покупателя
+        var poz=$('#orda').val();
+      //  poz++;
+       var m = $('#kon').val();
+
+        for (i = 1; i <= m; i++) {
+            //для удаления
+            var t = $('#' + i).val()
+            //для добавления
+            var art =$('#' + i + '1').html();
+            var stoim = $('#' + i + '2').html();
+            art = art + stoim;
+            $('#content').load('/Order/Goodi?ind=' + poz, 'art=' + art);
+
+
+
+            $('#content').load('/Basket/Del?Id=' + t);
+        }
+
+       
+    }
+    </script>

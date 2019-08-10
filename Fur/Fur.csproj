@@ -135,6 +135,7 @@
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -142,10 +143,14 @@
     <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Color.cs" />
+    <Compile Include="Models\Good.cs" />
     <Compile Include="Models\LampContext.cs" />
     <Compile Include="Models\Offer.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Delivery.cs" />
+    <Compile Include="Models\Variant.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -200,6 +205,11 @@
     <Content Include="Views\Basket\Basket.cshtml" />
     <Content Include="Views\Basket\Max.cshtml" />
     <Content Include="Views\Basket\Kol.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\Delivery.cshtml" />
+    <Content Include="Views\Order\Variant.cshtml" />
+    <Content Include="Views\Order\Sum.cshtml" />
+    <Content Include="Views\Order\Final.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
