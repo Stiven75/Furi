@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Fur.Models.Size>
+@foreach (var Size in Model)
+{
+
+    <div class="row custom-table">
+        <span>@Size.Id</span>
+        <span><input value="@Size.Name" id="@Size.Id-name" class="custom-input"></span>
+        <span>
+            <input type="checkbox" id="@Size.Id" class="old-checkbox" onchange="SelectCheckbox(this)">
+            <span class="new-checkbox"></span>
+            <span class="new-checkbox-block"></span>
+        </span>
+    </div>
+
+}

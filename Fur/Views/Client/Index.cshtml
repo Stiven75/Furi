@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Fur.Models.Order>
+<div id="OrderTable">
+    <div class="client-header">
+        <span>Номер заказа</span>
+        <span>Имя заказчика</span>
+        <span>Телефон заказчика</span>
+    </div>
+    <div class="client-body">
+
+        @foreach (var Item in Model.ToList())
+        {
+            <div onclick="ClientOrderItem(@Item.Id)">
+                <span>@Item.Id</span>
+                <span>@Item.Name</span>
+                <span>@Item.PhoneNuber</span>
+            </div>
+
+
+        }
+
+
+
+
+
+    </div>
+
+</div>
+<div id="OrderMain">
+
+    </div>

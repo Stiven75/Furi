@@ -1,0 +1,57 @@
+﻿@using Fur.Service;
+@model Fur.Models.Product
+@{
+
+    var Categories = CategoryService.GetCategory().ToList();
+
+    var CategoryString = new List<SelectListItem>();
+
+    foreach (var Category in Categories)
+    {
+        CategoryString.Add(new SelectListItem() { Value = Category.Id.ToString(), Text = Category.Name });
+
+    }
+
+
+    CategoryString = ObjectService.UpdateDropDownList(CategoryString, (int)Model.CategoryId);
+
+    string cheked = Model.Enabled == true ? "checked" : " ";
+
+}
+
+<div class="row custom-table" style="display:inline-table">
+    <button class="btn btn-danger" onclick="location.replace('../Products')">Назад</button>
+    <button class="btn btn-danger" onclick="SaveProductMain()" style="margin-left:10px;">Сохранить</button>
+
+
+
+    <input type="hidden" id="ProductHidden" value="@Model.Id">
+
+    <span class="admin-prod-bloc"><span class="admin-prod-bloc-name">Название:</span><input id="@Model.Id-name" value="@Model.Name" class="admin-prod-bloc-value" /></span>
+    <span class="admin-prod-bloc"><span class="admin-prod-bloc-name">Артикул:</span><input id="@Model.Id-artno" value="@Model.ArtNo" class="admin-prod-bloc-value" /></span>
+    <span class="admin-prod-bloc"><span class="admin-prod-bloc-name">Активность:</span><input id="@Model.Id-enabled" type="checkbox" @cheked/></span>
+    <span class="admin-prod-bloc"><span class="admin-prod-bloc-name">Категория:</span>  @Html.DropDownList(Model.Id + "-category", CategoryString)</span>
+
+    <span class="admin-prod-bloc">
+        <span class="admin-prod-bloc-name">Изображение:</span>
+        <img src="../../img/@Model.Photo" style="height: 130px;margin-right: 20px;">
+
+
+        @using (Html.BeginForm("UploadImg", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <input type="hidden" name="ProductIdString" value="@Model.Id">
+            <input type="file" name="upload" class="btn btn-danger" />
+            <br>
+            <input type="submit" value="Загрузить" class="btn btn-danger" />
+        }
+    </span>
+
+
+    @Html.Partial("EditOffer", Model.Id);
+
+
+</div>
+
+
+

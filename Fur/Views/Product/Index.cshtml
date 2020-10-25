@@ -1,174 +1,68 @@
-﻿@model IEnumerable <Fur.Models.Product>
+﻿@using Newtonsoft.Json
+@using Fur.Service
+@model Fur.Models.Product
 @{
     ViewBag.Title = "Товар";
+    var Category = CategoryService.GetCategoryById((int)Model.CategoryId);
+
 }
 <div class="container" style="padding-top:25px;">
 
     <div class="row">
         <div id="col" style="display:none;">Red</div>
         <p id="siz" style="display:none;">S</p>
-        @foreach (var item in Model)
+
+
+        <input type="hidden" id="ProductIdHidden" value="@Model.Id">
+        <input type="hidden" id="OfferIdHidden" value="@Model.Offer.First().Id">
+        <img src="../../img/@Model.Photo" class="product-picture" />
+        <p><strong>Название:</strong><i>@Model.Name</i></p>
+
+
+        <div>
+            <p id="drow">Выберете цвет</p>
+            @foreach (var Offer in Model.Offer)
+            {
+                string OfferStr = JsonConvert.SerializeObject(Offer);
+
+                <input type="button" id="@Offer.Id" name="color" class="razmer_k" style="background:@Offer.Color.ColorCode;" onclick="SelectOfferClient(@OfferStr)" />
+
+            }
+        </div>
+
+        <div>
+            <p>Выберете размер</p>
+            @foreach (var Offer in Model.Offer)
+            {
+
+                string OfferStr = JsonConvert.SerializeObject(Offer);
+                <input type="submit" name="size" id="@Offer.Id" class="razmer_k" value="@Offer.size.Name" onclick="SelectOfferClient(@OfferStr)" />
+            }
+        </div>
+
+        <div id="results"></div>
+        <div id="skrit">
+            <p><strong>Стоимость:</strong><i id="Sum">@Model.Offer.First().Price</i></p>
+            <p><strong>Артикуль:</strong><i id="ArtNoOffer">@Model.Offer.First().ArtNo</i></p>
+        </div>
+
+
+
+        @if (Category != null)
         {
-            if (Convert.ToInt32(ViewData["Nomer"]) == item.Id)
-            {<i id="art" style="display:none;">@item.Offer.Articul</i>
-            <i id="id" style="display:none;">@item.Id</i>
-            <img src="../../img/@item.Category.Name/@item.Photo.Photi" style="height:250px" />
-            <p><strong>Название:</strong><i>@item.Name</i></p>
-
-
-            <div>
-                <p id="drow">Выберете цвет</p>
-                <input type="button" id="1" name="color" class="razmer_k" style="background: rgb(255, 0, 0);" />
-                <input type="button" id="2" name="color" class="razmer_k" style="background: #76ff7a;" />
-            </div>
-            <div>
-                <p>Выберете размер</p>
-                <input type="submit" name="size" id="3" class="razmer_k" style="background: rgb(138, 138, 138);" value="S" />
-                <input type="submit" name="size" id="4" class="razmer_k" value="M" />
-            </div>
-
-            <div id="results"></div>
-            <div id="skrit">
-                <p><strong>Стоимость:</strong><i id="sum">@item.Offer.Price</i></p>
-                <p><strong>Артикуль:</strong><i id="artl">@item.Offer.Articul</i></p>
-            </div>
-            <p><strong>Категория:</strong><i>@item.Category.Name</i></p>
-            <p><input type="button" name="price" id="5" class="btn btn-danger" value="Купить" /></p>
+        <p><strong>Категория:</strong><i>@Category.Name</i></p>
         }
-    }
+        
+        
+        <p><input type="button" name="price" onclick="SendProduct()" class="btn btn-danger" value="Купить" /></p>
     </div>
+
     <script>
-        $(document).ready(function () {
-        $('#1').click(function (e) {
-            e.preventDefault();
-            document.getElementById('skrit').style = "display:none;";
-            document.getElementById('1').style = "background: #ff0000;";
-            document.getElementById('2').style = "background: #76ff7a;";
-            var coli = $('#col');
-            coli.empty();
-            coli.append("Red");
-           var size = $('#siz').html();
-            var art = $('#art').html();
-            color = "Red";
 
-            switch (size) {
-                case "S": size = "1"; break;
-                case "M": size = "2"; break;
-            }
-
-            switch (color) {
-                case "Red": color = "1"; break;
-                case "Green": color = "2"; break;
-            }
-            var souz = color + size;
-            $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
-            reset();
-            });
-        $('#2').click(function (e) {
-            e.preventDefault();
-
-            document.getElementById('skrit').style = "display:none;";
-                document.getElementById('1').style = "background: #ff6666;";
-                document.getElementById('2').style = "background: #008000;";
-                var coli = $('#col');
-                coli.empty();
-                coli.append("Green");
-                var size = $('#siz').html();
-                var art = $('#art').html();
-                color = "Green";
-                switch (size) {
-                    case "S": size = "1"; break;
-                    case "M": size = "2"; break;
-                }
-                switch (color) {
-                    case "Red": color = "1"; break;
-                    case "Green": color = "2"; break;
-                }
-                
-            var souz = color + size;
-
-            $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
-            reset();
-            });
-        $('#3').click(function (e) {
-            e.preventDefault();
-
-            document.getElementById('skrit').style = "display:none;";
-                document.getElementById('3').style = "background: #8a8a8a;";
-                document.getElementById('4').style = "background: #dddddd;";
-                var coli = $('#siz');
-                coli.empty();
-                coli.append("S");
-                var color = $('#col').html();
-                var art = $('#art').html();
-                var size = "S";
-
-                switch (size) {
-                    case "S": size = "1"; break;
-                    case "M": size = "2"; break;
-                }
-
-                switch (color) {
-                    case "Red": color = "1"; break;
-                    case "Green": color = "2"; break;
-                }
-            var souz = color + size;
-
-
-            $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
-            reset();
-            });
-        $('#4').click(function (e) {
-            e.preventDefault();
-
-            document.getElementById('skrit').style = "display:none;";
-            document.getElementById('3').style = "background: #dddddd;";
-            document.getElementById('4').style = "background: #8a8a8a;";
-            var coli = $('#siz');
-            coli.empty();
-            coli.append("M");
-            var color = $('#col').html();
-            var art = $('#art').html();
-            var size = "M";
-
-            switch (size) {
-                case "S": size = "1"; break;
-                case "M": size = "2"; break;
-            }
-
-            switch (color) {
-                case "Red": color = "1"; break;
-                case "Green": color = "2"; break;
-            }
-            var souz = color + size;
-
-            $('#results').load('/Product/Color?art=' + art, 'souz=' + souz);
-            reset();
-        });
-        $('#5').click(function (e) {
-                e.preventDefault();
-            var art = $('#artl').html();
-            var id = $('#id').html();
-            var sum = $('#sum').html();
-            art = art + sum;
-            $('#content').load('/Basket/Sold?ProductId=' + id, 'Articul=' + art)
-            $('#Kol').load('/Basket/Kol', reset());
-            $('#content').load('/Basket/Basket', reset());
-            $('#max').load('/Basket/Max', reset());
-
-            });
-
-        });
-
-        function reset()
-        {
-            $('#Kol').load('/Basket/Kol');
+        function reset() {
+            $('#Kol').load('/Basket/Count');
             $('#content').load('/Basket/Basket');
-            $('#max').load('/Basket/Max');
+           // $('#max').load('/Basket/Max');
         }
     </script>
-
-
-
-   
 </div>

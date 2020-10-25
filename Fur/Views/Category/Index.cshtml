@@ -1,40 +1,43 @@
 ﻿
 @model IEnumerable<Fur.Models.Product>
 @{
-                /**/
+    /**/
 
-                Layout = "~/Views/Shared/_Layout.cshtml";
+
+   string CategoryId= ViewData["CategoryId"].ToString();
+
+
+
+    int head = 0;
+
 }
-<table>
-    <thead class="alert alert-success">
-        <tr class="header">
-            <td class="shir"><p>Название мебели</p></td>
-            <td class="shir"><p>Цена</p></td>
-        </tr>
-    </thead>
-    @{
-        string head = " ";
-        try
+
+<div class="container row">
+
+    @foreach (var item in Model)
+    {
+        if (item.Enabled ==true && ((item.CategoryId.ToString() == CategoryId) || (CategoryId == (0).ToString())))
         {
-            head = ViewData["s"].ToString();
+
+             <div class="categ-prod-block" onclick="location.replace('../Product/Index/url-@item.Id')">
+
+
+
+        <span class="d-f-j-c"><span style="margin: 10px 0;"><img src="~/img/@item.Photo" class="categ-prod-block-img"> </span></span>
+        <div class="categ-prod-block-additional">
+            <span class="disp-li text-category-prod"><strong>Название:</strong> @item.Name</span>
+            <span class="disp-li text-category-prod"><strong>Артикул:</strong> @item.ArtNo</span>
+            <span class="disp-li text-category-prod"><strong>Категория:</strong> @item.CategoryId</span>
+            @*@if (item.Baskets.Count > 0)
+            {
+            <span class=" disp-li text-category-prod"><strong>Уже куплено:</strong> @item.Baskets.Count</span>
+            }*@
+        </div>
+
+    </div>
         }
-        catch { }
     }
 
-    <tbody class="alert alert-info">
-        <form method="get" action="~/Home/product">
-            @foreach (var item in Model)
-            {
-                if (item.Activiti == '1'.ToString() && ((item.Category.Name == head) || (head == " ")))
-                {
 
-                    <tr>
-                        <td class="shir"><a class="granici alert-info" href="~/Product/Index/url-@item.Id">@item.Name</a></td>
-                        <td class="shir"><p>@item.Offer.Price</p></td>
-                    </tr>
-                }
-            }
-        </form>
-    </tbody>
+</div>
 
-</table>

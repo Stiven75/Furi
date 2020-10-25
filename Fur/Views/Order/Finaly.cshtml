@@ -1,0 +1,17 @@
+﻿@model Fur.Models.Order
+
+@if (Model.Id != 0)
+{
+    <div class="container row">
+    <h2>Благодарим за оформление заявки №@Model.Id</h2>
+        @Html.Partial("ItemOrder",Model);
+
+
+        </div>
+
+
+}
+else
+{
+    <p>Данный заказ еще не создан</p>
+}

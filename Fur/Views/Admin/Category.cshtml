@@ -1,0 +1,25 @@
+﻿
+
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <button class="btn btn-danger" onclick="location.replace('../Admin')">Назад</button>
+            <button class="btn btn-danger" onclick="AddCategory()">Добавить</button>
+            <button class="btn btn-danger" onclick="UpCategory()">Обновить</button>
+            <button class="btn btn-danger" onclick="DeletCategory()">Удалить</button>
+        </div>
+        <div class="row">
+            <span>Номер</span>
+            <span>Название</span>
+        </div>
+        <div id="CategoryBlock">
+    
+        </div>
+    </div>
+</div>
+
+<script>
+      window.onload = function() {
+   $('#CategoryBlock').load('/Admin/CategoryPartial');
+  };
+    </script>

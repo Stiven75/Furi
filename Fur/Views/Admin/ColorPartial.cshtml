@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Fur.Models.Color>
+@foreach (var Color in Model)
+{
+
+    <div class="row custom-table">
+        <span>@Color.Id</span>
+        <span><input value="@Color.Name" id="@Color.Id-name" class="custom-input"></span>
+        <span><input value="@Color.ColorCode" id="@Color.Id-code" class="custom-input" type="color"></span>
+        <span>
+            <input type="checkbox" id="@Color.Id" class="old-checkbox" onchange="SelectCheckbox(this)">
+            <span class="new-checkbox"></span>
+            <span class="new-checkbox-block"></span>
+        </span>
+    </div>
+
+}

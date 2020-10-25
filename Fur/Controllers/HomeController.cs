@@ -6,18 +6,16 @@ using System.Web.Mvc;
 using Fur.Models;
 using System.Data.Entity;
 using Fur.Controllers;
-
+using Fur.Service;
 
 namespace Fur.Controllers
 {
     [RoutePrefix("~/")]
     public class HomeController : Controller
     {
-        LampContext db = new LampContext();
         public ActionResult Index()
         {
-            var Products = db.Products.Include(p => p.Category).Include(p => p.Offer);
-            return View(Products);
+            return View();
         }
         
         [HttpPost]
@@ -26,13 +24,5 @@ namespace Fur.Controllers
             ViewData["s"] = Stol;
             return Redirect($"~/Category/{Stol}");
         }
-        
-        [HttpGet]
-        public ActionResult product(int Id=5)
-        {
-           ViewData["Nomer"] = Id;
-           return Content($"controller: Product | action: Index");
-        }
-
     }
 }

@@ -10,18 +10,10 @@ namespace Fur.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Telefon { get; set; }
-        public int? VariantId { get; set; }
-        public Variant Variant { get; set; }
-        public int? DeliveryId { get; set; }
-        public Delivery Delivery { get; set; }
-
-
-        public ICollection<Good> Good { get; set; }
-        public Order()
-        {
-            Good = new List<Good>();
-            return;
-        }
+        public string PhoneNuber { get; set; }
+        public string DeliveryName { get; set; }
+        public string PaymentString { get; set; }
+        public List<Good> goods { get; set; }
+        public int CostOrder { get; set; }
     }
 }

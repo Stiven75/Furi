@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Fur.Models.Basket>
+﻿@using Fur.Service;
+@model IEnumerable<Fur.Models.Basket>
 @{
     ViewBag.Title = "Заявка";
 }
@@ -24,21 +25,37 @@
                 a = gok.ToString() + '2';
                 <tr>
                     <td class="stoka_tab"><input type="hidden" value="@item.Id" id="@gok"></td>
-                    <td class="stoka_tab"><p><i>@item.Product.Name</i></p></td>
-                    <td class="stoka_tab"><p><i id="@n">@item.Articul</i></p></td>
-                    <td class="stoka_tab"><p><i id="@a">@item.Price</i></p></td>
+                    <td class="stoka_tab"><p><i>@ObjectService.IsProductInBasketItem(item, "Name")</i></p></td>
+                    <td class="stoka_tab"><p><i id="@n">@item.Offer.ArtNo</i></p></td>
+                    <td class="stoka_tab"><p><i id="@a">@item.Offer.Price</i></p></td>
                 </tr>
                 
             }
         </tbody>
     </table>
 <input type="hidden" value="@gok"  id="kon">
-    <p>Сумма итого:<i><input type="text" value="@Html.Action("Sum", "Order")" name="sum" disabled /></i></p>
-    <p><input type="text" class="panel-info" name="imua" placeholder="Введите имя" id="name"></p>
-    <p><input type="tel" class="panel-info" name="nomer" placeholder="Введите номер" id="nomer"></p>
-    <p>@Html.Action("Delivery", "Order")</p>
-    <p id="varina">@Html.Action("Variant", "Order")</p>
-    <a href="~/Order/Final"><input type="submit" class="btn btn-danger" name="g" value="Сохранить" onclick="t()"></a>
+    <p>Сумма итого:<i><input type="text" value="@Model.Sum(x=>x.Offer.Price*x.Count)" name="sum" disabled /></i></p>
+    <p><input type="text" class="panel-info" name="imua" placeholder="Введите имя" id="Name"></p>
+    <p><input type="tel" class="panel-info" name="nomer" placeholder="Введите номер" id="Phone"></p>
+    <p>
+        <select name="Delivery" id="Delivery">
+
+            <option value="Pickup">Pickup</option>
+            <option value="Courier">Courier</option>
+
+        </select>
+    </p>
+    <p id="varina">
+        <select name="Payment" id="Payment">
+
+            <option value="In cash">In cash</option>
+            <option value="Card">Card</option>
+            <option value="On credit">On credit</option>
+
+        </select>
+        <input type="hidden" value="@ViewData["maxime"]" id="orda">
+    </p>
+    <input type="submit" class="btn btn-danger" name="g" value="Сохранить" onclick="OrderCreate()">
 
 <script>
 

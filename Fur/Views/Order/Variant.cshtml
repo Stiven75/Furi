@@ -1,8 +1,0 @@
-﻿@model IEnumerable<Fur.Models.Variant>
-<select name="Varia" id="varik">
-    @foreach (var item in Model)
-    {
-        <option value="@item.Id">@item.Name</option>
-    }
-</select>
-<input type="hidden" value="@ViewData["maxime"]" id="orda">

@@ -5,89 +5,111 @@ using System.Web;
 using System.Web.Mvc;
 using Fur.Models;
 using System.Data.Entity;
-
+using Fur.Service;
 
 namespace Fur.Controllers
 {
     public class OrderController : Controller
     {
-        LampContext db = new LampContext();
+        //LampContext db = new LampContext();
         public ActionResult Index()
         {
-            var Bas = db.Baskets.Include(b => b.Product);
-        
-            return View(Bas);
+            // var Bas = db.Baskets.Include(b => b.Offer);
+            var Basket = BasketService.GetBasket();
+
+
+            return View(Basket);
         }
         public ActionResult Delivery()
         {
-            var f = db.Deliveries;
-            return PartialView(f);
+          //  var f = db.Deliveries;
+            return PartialView();
         }
         public ActionResult Variant()
         {
-            var Ba = db.Variants;
+         //   var Ba = db.Variants;
             try
             {
-                ViewData["maxime"] = db.Orders.Max(b => b.Id);
+               /// ViewData["maxime"] = db.Orders.Max(b => b.Id);
             }
             catch { ViewData["maxime"] = 0; }
             ViewData["maxime"] = Convert.ToInt32(ViewData["maxime"]) + 1;
-            return PartialView(Ba);
+            return PartialView();
         }
         public ActionResult Sum()
         {
             try
             {
-                ViewData["sum"] = db.Baskets.Sum(b => b.Price);
+               // ViewData["sum"] = db.Baskets.Sum(b => b.Price);
             }
             catch { ViewData["sum"] = 0; }
             return PartialView();
         }
-        public ActionResult Final()
+        public ActionResult Finaly(int OrderId)
         {
 
-            try
+            var Order = OrderService.GetOrder().Where(x => x.Id == OrderId).ToList();
+
+            Order orderResponse = new Order();
+            if (Order.Count() != 0)
             {
-                ViewData["maxime"] = db.Orders.Max(b => b.Id);
-                ViewData["maxime"] = db.Orders.Max(b => b.Id);
-                ViewData["maxime"] = db.Orders.Max(b => b.Id);
+                orderResponse = Order.First();
             }
-            catch { ViewData["maxime"] = 0; }
-            return View();
+
+
+            orderResponse.goods = GoodService.GetBasketsByOrderId(orderResponse.Id).ToList();
+
+
+            return View(orderResponse);
         }
 
 
-
-        public ActionResult Solder(string imua, string nomer)
+        public JsonResult CreateOrder(Order OrderNew)
         {
-                int k = nomer.Length;
-                int v = Convert.ToInt32(nomer.Remove(0, k - 1));
-                nomer = nomer.Remove(k - 1, 1);
-                int d = Convert.ToInt32(nomer.Remove(0, k - 2));
-                nomer = nomer.Remove(k - 2, 1);
-             Order g = new Order();
-             g.Name = imua;
-             g.Telefon = nomer;
-             g.VariantId = v;
-             g.DeliveryId = d;
-             db.Orders.Add(g);
-             db.SaveChanges();
+            var Baskets = BasketService.GetBasket();
+            var Order = OrderService.GetOrder();
+            int NextOrderId = 0;
+         
+            if (Baskets.Count() == 0){ return Json(new { result = false,msg="Корзина пуста" }); }
 
-            return View();
+            OrderNew.CostOrder = Baskets.Sum(x => x.Offer.Price * x.Count);
+           
+            if (Order.Count() == 0)
+            {
+                NextOrderId = 1;
+            }
+            else
+            {
+                NextOrderId = Order.Max(x => x.Id) + 1;
+            }
+
+            OrderService.InsUpOrder(OrderNew);
+
+            var OrderCurent = OrderService.GetOrder().Where(x=>x.Id==NextOrderId).First();
+
+            foreach (var BasketItem in Baskets)
+            {
+                GoodService.InsUpGoods(new Good() { 
+                    ArtNo=BasketItem.Offer.ArtNo,
+                    Count=BasketItem.Count,
+                    OfferId=BasketItem.OfferId,
+                    OrderId=OrderCurent.Id,
+                    Price=BasketItem.Offer.Price    
+                });
+
+                BasketService.DelBasketById(BasketItem.Id);
+            }
+
+
+
+
+            return Json(new { result=true,msg="Заказ создан",OrderId= OrderCurent.Id});
         }
-        public ActionResult Goodi(string ind, string art)
-        {
-            string sum = art.Remove(0, 7);
-            art = art.Remove(7, art.Length - 7);
 
-              Good g = new Good();
-              g.OrderId = Convert.ToInt32(ind);
-              g.Price = sum;
-              g.Artikul = art;
-              db.Goods.Add(g);
-              db.SaveChanges();
 
-            return View();
-        }
+
     }
+
+
+
 }

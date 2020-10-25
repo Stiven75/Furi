@@ -1,93 +1,61 @@
-﻿@model IEnumerable<Fur.Models.Basket>
-
-<link rel="stylesheet" href="~/Content/style.css" type="text/css" />
-<table class="table-hover" id="content">
-    <thead class="alert alert-success">
-        <tr class="header">
-            <td class="shir text-center"><p>Название мебели</p></td>
-            <td class="shir text-center"><p>Фото</p></td>
-            <td class="shir text-center"><p>Цвет</p></td>
-            <td class="shir text-center"><p>Размер</p></td>
-            <td class="shir text-center"><p>Стоимость</p></td>
-            <td class="shir text-center"></td>
-        </tr>
-    </thead>
-    @{
-        string head = " ";
-        try
-        {
-            head = ViewData["s"].ToString();
-        }
-        catch { }
+﻿@using Fur.Service;
+@model IEnumerable<Fur.Models.Basket>
+@{
+    string head = " ";
+    try
+    {
+        head = ViewData["s"].ToString();
     }
+    catch { }
+}
+<link rel="stylesheet" href="~/Content/style.css" type="text/css" />
+<div class="table-hover" id="content">
+    <div class=" alert-success bascet-header">
+        <div class="shir text-center"><p>Название мебели</p></div>
+        <div class="shir text-center"><p>Фото</p></div>
+        <div class="shir text-center"><p>Цена</p></div>
+        <div class="shir text-center"><p>Количество</p></div>
+        <div class="shir text-center"></div>
+    </div>
 
-    <tbody class="alert alert-info">
-        <p>@ViewData["grom"]</p>
+
+    <div class="alert-info bascet-body">
         <form method="get" action="~/Home/product">
             @foreach (var item in Model)
             {
-                <tr>
-                    <td class="stoka_tab"><p><i>@item.Product.Name</i></p></td>
-                    <td class="stoka_tab"><img src="../../img/@item.Product.Category.Name/@item.Product.Photo.Photi" style="height:50px" /></td>
-                    @{
-                        try
-                        {
-                            ViewData["siz"] = item.Articul.Remove(0, item.Articul.Length - 1);
-                            ViewData["col"] = item.Articul.Remove(0, item.Articul.Length - 2);
-                            ViewData["col"] = ViewData["col"].ToString().Remove(1, 1);
-                        }
-                        catch { }
-                    }
+                <div class="table-body-custom" id="row-cart-item">
+                
+                
+                    <div class="stoka_tab">@ObjectService.IsProductInBasketItem(item,"Name")</div>
+                    <div class="stoka_tab"><img src="../../img/@ObjectService.IsProductInBasketItem(item,"Photo")" style="height:50px" /></div>
 
-                    @switch (ViewData["col"])
-                    {
-                        case "1":
+                    <div class="stoka_tab"><p><i>@item.Offer.Price</i></p></div>
+                    <div class="stoka_tab"><p><i>@item.Count</i></p></div>
 
-                            switch (ViewData["siz"])
-                            {
-                                case "1":
-                                    <td class="stoka_tab"><div class="razmer2" style="background: rgb(255, 0, 0);"></div></td>
-                                    <td class="stoka_tab"><div class="razmer2 centered" style="background: rgb(138, 138, 138);">S</div></td>
-                                    break;
-
-                                case "2":
-                                    <td class="stoka_tab"><div class="razmer2" style="background: rgb(255, 0, 0);"></div></td>
-                                    <td class="stoka_tab"><div class="razmer2 centered" style="background: rgb(138, 138, 138);">M</div></td>
-                                    break;
-
-                            }
-                            break;
-                        case "2":
-
-                            switch (ViewData["siz"])
-                            {
-                                case "1":
-                                    <td class="stoka_tab"><div class="razmer2" style="background: #76ff7a;"></div></td>
-                                    <td class="stoka_tab"><div class="razmer2 centered" style="background: rgb(138, 138, 138);">S</div></td>
-                                    break;
-
-                                case "2":
-                                    <td class="stoka_tab"><div class="razmer2" style="background: #76ff7a;"></div></td>
-                                    <td class="stoka_tab"><div class="razmer2 centered" style="background: rgb(138, 138, 138);">M</div></td>
-                                    break;
-
-                            }
-                            break;
-
-                    }
-
-                    <td class="stoka_tab"><p><i>@item.Price</i></p></td>
-
-                    <td class="stoka_tab"><input type="checkbox" id="@item.Id"></td>
-                </tr>
+                    <div class="stoka_tab"><input type="checkbox" id="@item.Id" name="row-cart-item"></div>
+                </div>
             }
         </form>
-    </tbody>
-
-</table>
-<div id="maxi">
-@Html.Action("Max")
     </div>
+</div>
+
+<div class="row">
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+<div id="maxi">
+    @Html.Action("Max")
+</div>
 
 
 

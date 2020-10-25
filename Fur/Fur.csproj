@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +44,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -132,8 +134,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BasketController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -144,20 +148,31 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Color.cs" />
     <Compile Include="Models\Good.cs" />
-    <Compile Include="Models\LampContext.cs" />
     <Compile Include="Models\Offer.cs" />
     <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Delivery.cs" />
-    <Compile Include="Models\Variant.cs" />
     <Compile Include="Models\Size.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\GoodService.cs" />
+    <Compile Include="Service\OrderService.cs" />
+    <Compile Include="Service\BasketService.cs" />
+    <Compile Include="Service\CategoryService.cs" />
+    <Compile Include="Service\ColorService.cs" />
+    <Compile Include="Service\ObjectService.cs" />
+    <Compile Include="Service\ProductService.cs" />
+    <Compile Include="Service\OfferService.cs" />
+    <Compile Include="Service\SizeService.cs" />
+    <Compile Include="Service\SqlHelper.cs" />
+    <Compile Include="Service\SqlService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Lampstore.mdf" />
     <Content Include="App_Data\Lampstore_log.ldf">
       <DependentUpon>Lampstore.mdf</DependentUpon>
+    </Content>
+    <Content Include="App_Data\Lection.mdf" />
+    <Content Include="App_Data\Lection_log.ldf">
+      <DependentUpon>Lection.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -168,6 +183,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\Диван\1.jpg" />
+    <Content Include="img\Диван\2.jpg" />
+    <Content Include="img\Диван\3.jpg" />
+    <Content Include="img\Диван\4.jpg" />
+    <Content Include="img\Кровать\1.jpg" />
+    <Content Include="img\Кровать\2.jpg" />
+    <Content Include="img\Кровать\3.jpg" />
+    <Content Include="img\Кровать\4.jpg" />
+    <Content Include="img\Кровать\5.jpg" />
+    <Content Include="img\Стол\1.jpg" />
+    <Content Include="img\Стол\2.jpg" />
+    <Content Include="img\Стол\3.jpg" />
+    <Content Include="img\Стол\4.jpeg" />
+    <Content Include="img\Стол\5.jpg" />
+    <Content Include="img\Стул\1.jpg" />
+    <Content Include="img\Стул\2.jpg" />
+    <Content Include="img\Стул\3.jpg" />
+    <Content Include="img\Стул\4.jpg" />
+    <Content Include="img\Стул\5.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -200,16 +234,28 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Product\Color.cshtml" />
     <Content Include="Views\Category\Categoru.cshtml" />
     <Content Include="Views\Basket\Basket.cshtml" />
     <Content Include="Views\Basket\Max.cshtml" />
-    <Content Include="Views\Basket\Kol.cshtml" />
+    <Content Include="Views\Basket\Count.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
-    <Content Include="Views\Order\Delivery.cshtml" />
-    <Content Include="Views\Order\Variant.cshtml" />
     <Content Include="Views\Order\Sum.cshtml" />
-    <Content Include="Views\Order\Final.cshtml" />
+    <Content Include="Views\Order\Finaly.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Category.cshtml" />
+    <Content Include="Views\Admin\CategoryPartial.cshtml" />
+    <Content Include="Views\Admin\Color.cshtml" />
+    <Content Include="Views\Admin\ColorPartial.cshtml" />
+    <Content Include="Views\Admin\SizePartial.cshtml" />
+    <Content Include="Views\Admin\SIze.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
+    <Content Include="Views\Admin\ProductsPartial.cshtml" />
+    <Content Include="Views\Admin\EditProduct.cshtml" />
+    <Content Include="Views\Admin\EditOffer.cshtml" />
+    <Content Include="Views\Admin\OffersPartial.cshtml" />
+    <Content Include="Views\Shared\ItemOrder.cshtml" />
+    <Content Include="Views\Client\ItemOrder.cshtml" />
+    <Content Include="Views\Client\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

@@ -1,0 +1,24 @@
+﻿
+
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <button class="btn btn-danger" onclick="location.replace('../Admin')">Назад</button>
+            <button class="btn btn-danger" onclick="AddProduct()">Добавить</button>
+            <button class="btn btn-danger" onclick="DeletProduct()">Удалить</button>
+        </div>
+        <div class="row">
+            <span>Номер</span>
+            <span>Название</span>
+        </div>
+        <div id="ProductBlock">
+    
+        </div>
+    </div>
+</div>
+
+<script>
+      window.onload = function() {
+   $('#ProductBlock').load('/Admin/ProductsPartial');
+  };
+    </script>

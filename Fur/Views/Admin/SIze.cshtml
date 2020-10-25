@@ -1,0 +1,25 @@
+﻿
+
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <button class="btn btn-danger" onclick="location.replace('../Admin')">Назад</button>
+            <button class="btn btn-danger" onclick="AddSize()">Добавить</button>
+            <button class="btn btn-danger" onclick="UpSize()">Обновить</button>
+            <button class="btn btn-danger" onclick="DeletSize()">Удалить</button>
+        </div>
+        <div class="row">
+            <span>Номер</span>
+            <span>Название</span>
+        </div>
+        <div id="SizeBlock">
+    
+        </div>
+    </div>
+</div>
+
+<script>
+      window.onload = function() {
+            $('#SizeBlock').load('/Admin/SizePartial');
+        };
+    </script>

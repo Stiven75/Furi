@@ -1,0 +1,28 @@
+﻿@model int
+ 
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <button class="btn btn-danger" onclick="AddOffer()">Добавить</button>
+            <button class="btn btn-danger" onclick="UpOffer()">Обновить</button>
+            <button class="btn btn-danger" onclick="DeletOffer()">Удалить</button>
+        </div>
+        <div class="row custom-table offer-table-header ">
+            <span>Номер</span>
+            <span>Артикул</span>
+            <span>Цвет</span>
+            <span>Размер</span>
+            <span>Стоимость</span>
+        </div>
+        <div id="OfferBlock">
+    
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function ()
+    {
+          $('#OfferBlock').load('/Admin/OffersPartial/' +@Model);
+    };
+</script>

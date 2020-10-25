@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Fur.Models.Product>
+@foreach (var Product in Model)
+{
+
+    <div class="row custom-table product-table">
+        <span><a href="../Admin/EditProduct/@Product.Id" class="no-href">@Product.Id</a></span>
+
+        <span>@Product.Name</span>
+
+        <span>
+            <input type="checkbox" id="@Product.Id" class="old-checkbox" onchange="SelectCheckbox(this)">
+            <span class="new-checkbox"></span>
+            <span class="new-checkbox-block"></span>
+        </span>
+    </div>
+
+}

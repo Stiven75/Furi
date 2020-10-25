@@ -1,0 +1,52 @@
+﻿@using Fur.Service;
+@model Fur.Models.Order
+
+
+    <div class="row">
+        <div>
+            <h1>В данном заказе содержаться товары</h1>
+        </div>
+
+        <div class="result-order-head">
+            <p><span>Название</span></p>
+            <p><span>Фото</span></p>
+            <p><span>Количество</span></p>
+            <p><span>Цена</span></p>
+            <p><span>Стоимость</span></p>
+
+        </div>
+
+        <div class="result-order-body">
+            @foreach (var GoodItem in Model.goods)
+            {
+                       var Product = ObjectService.GetProduct(GoodItem);
+                <div class="result-order-body-item">
+             
+
+                    <p>@Product.Name</p>
+                    <p><img src="../../img/@Product.Photo" /></p>
+                    <p>@GoodItem.Count</p>
+                    <p>@GoodItem.Offer.Price</p>
+                    <p>
+                        @{ float Summ = GoodItem.Offer.Price * GoodItem.Count;
+
+
+
+                        }
+                        @Summ
+                    </p>
+                </div>
+
+                }
+            </div>
+
+
+            <div class="result-order-additional">
+
+                <p><span>Способ оплаты :</span>@Model.PaymentString</p>
+                <p><span>Способ доставки :</span>@Model.DeliveryName</p>
+                <p><span>Ваше имя :</span>@Model.Name</p>
+                <p><span>Ваш телефон :</span>@Model.PhoneNuber</p>
+
+            </div>
+        </div>

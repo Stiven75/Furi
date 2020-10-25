@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Fur.Models.Category>
+@foreach (var Cate in Model)
+{
+
+    <div class="row custom-table">
+        <span>@Cate.Id</span>
+        <span><input value="@Cate.Name" id="@Cate.Id-name" class="custom-input"></span>
+        <span>
+            <input type="checkbox" id="@Cate.Id" class="old-checkbox" onchange="SelectCheckbox(this)">
+            <span class="new-checkbox"></span>
+            <span class="new-checkbox-block"></span>
+        </span>
+    </div>
+
+}

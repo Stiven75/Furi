@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
 using Fur.Models;
+using Fur.Service;
 
 namespace Fur.Controllers
 {
@@ -13,14 +14,14 @@ namespace Fur.Controllers
     {
 
         // GET: Product
-        LampContext db = new LampContext();
+        //LampContext db = new LampContext();
         [Route("~/Product/Index/url-{id}")]
         public ActionResult Index(int? Id)
         {
             ViewBag.Controller = "";
             ViewBag.Action = "";
             ViewBag.CustomVariable = "";
-            var Products = db.Products.Include(p => p.Category).Include(p => p.Offer).Include(p => p.Photo);
+            var Products = ProductService.GetProductById((int)Id);
             ViewData["Nomer"] = Id;
             return View(Products);
         }
@@ -38,9 +39,18 @@ namespace Fur.Controllers
 
             }
             catch  { }
-            var Offers = db.Offers;
+            //var Offers = db.Offers;
             //var Offers = db.Offers.Where(o => o.Color.Name.Contains(name)).ToList();
-            return PartialView(Offers);
+            return PartialView();
+        }
+
+
+        public JsonResult GetProduct(int ProductId)
+        {
+
+
+
+            return Json(new { Product = ProductService.GetProductById(ProductId) });
         }
     }
 

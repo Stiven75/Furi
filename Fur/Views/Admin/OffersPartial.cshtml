@@ -1,0 +1,53 @@
+﻿@using Fur.Service;
+
+@model IEnumerable<Fur.Models.Offer>
+@{ 
+
+    var Colors = ColorService.GetColors().Select(x=> new SelectListItem()
+    {
+        Text=x.Name,
+        Value=x.Id.ToString()
+    }).ToList();
+
+    var Sizes = SizeService.GetSize().Select(x=> new SelectListItem()
+    {
+        Text=x.Name,
+        Value=x.Id.ToString()
+    }).ToList();
+
+    Dictionary<string, object> color = new Dictionary<string, object>();
+    Dictionary<string, object> size = new Dictionary<string, object>();
+
+
+}
+
+
+
+@foreach (var Offer in Model)
+{
+    color.Clear();size.Clear();
+    color.Add("id", Offer.Id+"-color");
+    size.Add("id", Offer.Id+"-size");
+
+    Colors = ObjectService.UpdateDropDownList(Colors,Offer.ColorId);
+    Sizes = ObjectService.UpdateDropDownList(Sizes,Offer.SizeId);
+
+    <div class="row custom-table offer-table">
+        <span><span>@Offer.Id</span></span>
+        <span><input value="@Offer.ArtNo" id="@Offer.Id-artnoOffer" class="custom-input"></span>
+        <span>@Html.DropDownList(Offer.ColorId.ToString(), Colors, color)</span>
+        <span>@Html.DropDownList(Offer.SizeId.ToString(), Sizes, size)</span>
+        <span><input value="@Offer.Price" id="@Offer.Id-price" class="custom-input" type="number"></span>
+        <span>
+            <input type="checkbox" id="@Offer.Id" class="old-checkbox" onchange="SelectCheckbox(this)">
+            <span class="new-checkbox"></span>
+            <span class="new-checkbox-block"></span>
+        </span>
+    </div>
+
+
+}
+
+
+
+

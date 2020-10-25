@@ -9,11 +9,6 @@ namespace Fur.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Offer> Offres { get; set; }
-        public Color()
-        {
-            Offres = new List<Offer>();
-            return;
-        }
+        public string ColorCode { get; set; }
     }
 }
